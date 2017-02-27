@@ -1,0 +1,18 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.gem
+
+allure-report
+target
+allure
+.idea
+*.iml
+*.ipr
+*.iws
+Gemfile.lock
+.gradle
+build

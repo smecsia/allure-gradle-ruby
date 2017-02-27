@@ -1,0 +1,28 @@
+group 'allure'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    repositories { jcenter() }
+
+    dependencies {
+        classpath "com.github.jruby-gradle:jruby-gradle-plugin:[1.1.4,2.0)"
+    }
+}
+apply plugin: 'com.github.jruby-gradle.base'
+
+import com.github.jrubygradle.JRubyExec
+
+dependencies {
+    jrubyExec 'rubygems:bundler:1.9.9'
+}
+
+task bundle(type: JRubyExec){
+    script 'bundle'
+    scriptArgs 'install'
+}
+
+task build(type: JRubyExec, dependsOn: 'bundle') {
+    script 'gem'
+    scriptArgs 'build', 'allure-rspec.gemspec'
+    environment('VERSION': version)
+}
